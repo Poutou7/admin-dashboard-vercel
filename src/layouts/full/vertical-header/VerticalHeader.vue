@@ -1,0 +1,139 @@
+<script setup>
+import { ref, watch } from "vue";
+import { useCustomizerStore } from "../../../stores/customizer";
+import LanguageDD from "./LanguageDD.vue";
+import NotificationDD from "./NotificationDD.vue";
+import ProfileDD from "./ProfileDD.vue";
+import Searchbar from "./Searchbar.vue";
+import RightMobileSidebar from "./RightMobileSidebar.vue";
+import Navigations from "./Navigations.vue";
+import { Icon } from "@iconify/vue";
+import Logo from "../logo/Logo.vue";
+import ThemeToggler from "./ThemeToggler.vue";
+
+const customizer = useCustomizerStore();
+const priority = ref(customizer.setHorizontalLayout ? 0 : 0);
+watch(priority, (newPriority) => {
+  priority.value = newPriority;
+});
+</script>
+
+<template>
+  <v-app-bar
+    elevation="0"
+    :priority="priority"
+    height="70"
+    id="top"
+    class="main-head"
+  >
+    <v-btn
+      class="hidden-lg-and-up custom-hover-primary"
+      size="small"
+      variant="text"
+      color="primary"
+      icon
+      @click.stop="customizer.SET_SIDEBAR_DRAWER"
+    >
+      <Icon icon="solar:hamburger-menu-line-duotone" height="22" />
+    </v-btn>
+
+    <!-- ---------------------------------------------- -->
+    <!-- Search part -->
+    <!-- ---------------------------------------------- -->
+    <Searchbar />
+
+    <!-- ---------------------------------------------- -->
+    <!-- Mega menu -->
+    <!-- ---------------------------------------------- -->
+    <div class="hidden-sm-and-down">
+      <Navigations />
+    </div>
+
+    <v-spacer class="hidden-sm-and-down" />
+
+    <!-- ---------------------------------------------- -->
+    <!-- Mobile Logo -->
+    <!-- ---------------------------------------------- -->
+    <div class="hidden-md-and-up">
+      <Logo />
+    </div>
+
+    <ThemeToggler />
+
+    <!-- ---------------------------------------------- -->
+    <!-- translate -->
+    <!-- ---------------------------------------------- -->
+    <div class="hidden-sm-and-down">
+      <LanguageDD />
+    </div>
+
+    <!-- ---------------------------------------------- -->
+    <!-- Chat -->
+    <!-- ---------------------------------------------- -->
+    <v-btn
+      icon
+      class="custom-hover-primary hidden-sm-and-down"
+      size="small"
+      variant="text"
+    >
+      <v-list-item to="/chat" class="pa-0 chat">
+        <Icon icon="solar:chat-line-linear" height="22" />
+      </v-list-item>
+    </v-btn>
+
+    <!-- ---------------------------------------------- -->
+    <!-- Notification -->
+    <!-- ---------------------------------------------- -->
+    <div class="hidden-sm-and-down">
+      <NotificationDD />
+    </div>
+
+    <!-- ---------------------------------------------- -->
+    <!-- User Profile -->
+    <!-- ---------------------------------------------- -->
+    <div class="hidden-sm-and-down">
+      <ProfileDD />
+    </div>
+
+    <!----Mobile ----->
+    <v-menu :close-on-content-click="true" class="mobile_popup">
+      <template v-slot:activator="{ props }">
+        <v-btn
+          icon
+          class="hidden-md-and-up custom-hover-primary"
+          color="primary"
+          variant="text"
+          v-bind="props"
+          size="small"
+        >
+          <Icon icon="solar:menu-dots-bold-duotone" height="22" />
+        </v-btn>
+      </template>
+      <v-sheet rounded="lg" elevation="10" class="mt-4 dropdown-box px-4 py-3">
+        <div class="d-flex justify-space-between align-center">
+          <RightMobileSidebar />
+          <LanguageDD />
+          <NotificationDD />
+          <v-btn icon class="custom-hover-primary" size="small" variant="text">
+            <v-list-item to="/chat" class="pa-0 chat">
+              <Icon icon="solar:chat-line-linear" height="22" />
+            </v-list-item>
+          </v-btn>
+          <ProfileDD />
+        </div>
+      </v-sheet>
+    </v-menu>
+  </v-app-bar>
+</template>
+
+<style scoped>
+.chat {
+  color: transparent;
+}
+
+@media (max-width: 992px) {
+  .chat {
+    min-height: 35px !important;
+  }
+}
+</style>

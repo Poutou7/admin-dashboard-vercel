@@ -1,0 +1,70 @@
+:lang(ro) {
+  font-family: "Cairo", sans-serif;
+}
+.img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.poppins {
+  font-family: "Poppins", sans-serif;
+}
+.cairo {
+  font-family: "Cairo", sans-serif;
+}
+
+@media (max-width: 992px) {
+  .text-h5 {
+    font-size: 16px !important;
+  }
+  .text-h4 {
+    font-size: 17px !important;
+  }
+  .text-subtitle-1,
+  .text-body-1 {
+    font-size: 14px !important;
+  }
+  .v-label,
+  .v-btn--size-default {
+    font-size: 12px !important;
+  }
+  .avatar {
+    width: 100px !important;
+    height: 100px !important;
+  }
+}
+@media (max-width: 575px) {
+  .text-h5 {
+    font-size: 14px !important;
+  }
+  .text-h4 {
+    font-size: 15px !important;
+  }
+  .text-subtitle-1,
+  .v-text-field input,
+  .text-body-1 {
+    font-size: 12px !important;
+  }
+  .v-btn--size-default,
+  .v-chip.v-chip--size-small {
+    font-size: 10px !important;
+  }
+  .avatar {
+    width: 85px !important;
+    height: 85px !important;
+  }
+  .v-tab.v-tab.v-btn,
+  .v-tabs--density-default {
+    height: 50px !important;
+  }
+  .v-btn--icon.v-btn--density-default {
+    width: calc(var(--v-btn-height));
+    height: calc(var(--v-btn-height));
+  }
+  .v-card-item {
+    padding: 15px;
+  }
+  .page-wrapper {
+    padding: 15px 5px !important;
+  }
+}
